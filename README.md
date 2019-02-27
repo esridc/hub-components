@@ -2,7 +2,7 @@
 
 # Web Components for ArcGIS Hub
 
-* `hub-follow button`
+* `hub-follow-button`
 
 ## Getting Started
 

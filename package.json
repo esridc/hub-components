@@ -29,5 +29,11 @@
     "jest-cli": "23.6.0",
     "puppeteer": "1.8.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/esridc/hub-components.git"
+    }
+  }
 }

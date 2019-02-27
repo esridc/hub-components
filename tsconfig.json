@@ -10,7 +10,8 @@
     ],
     "moduleResolution": "node",
     "module": "esnext",
-    "target": "es2017",
+    // bumped from es5 to use Array.includes
+    "target": "es6",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",

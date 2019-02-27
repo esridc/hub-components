@@ -8,37 +8,40 @@
 import '@stencil/core';
 
 
+import {
+  UserSession,
+} from '@esri/arcgis-rest-auth';
 
 
 export namespace Components {
 
   interface HubFollowButton {
     /**
-    * The first name
+    * ClientID that identifies the app launching OAuth 2.0
     */
     'clientid': string;
     /**
-    * The last name
+    * identifier for the ArcGIS Hub initiative
     */
-    'last': string;
+    'initiativeid': string;
     /**
-    * The middle name
+    * User metadata
     */
-    'middle': string;
+    'user': UserSession;
   }
   interface HubFollowButtonAttributes extends StencilHTMLAttributes {
     /**
-    * The first name
+    * ClientID that identifies the app launching OAuth 2.0
     */
     'clientid'?: string;
     /**
-    * The last name
+    * identifier for the ArcGIS Hub initiative
     */
-    'last'?: string;
+    'initiativeid'?: string;
     /**
-    * The middle name
+    * User metadata
     */
-    'middle'?: string;
+    'user'?: UserSession;
   }
 }
 
