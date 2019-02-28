@@ -12,7 +12,7 @@ import { followInitiative, isUserFollowing, unfollowInitiative } from '../../uti
 
 export class HubFollowButton {
   /**
-   * ClientID that identifies the app launching OAuth 2.0
+   * ClientID to identify the app launching auth
    */
   @Prop() clientid: string;
 
@@ -27,12 +27,12 @@ export class HubFollowButton {
   @Prop({ mutable: true }) user: IUser;
 
   /**
-   * User metadata
+   * Authentication info.
    */
   @Prop({ mutable: true }) session: UserSession;
 
   /**
-   * User metadata
+   * Text to display on the button
    */
   @State() callToActionText: string = "Follow";
 
@@ -49,9 +49,13 @@ export class HubFollowButton {
         this.session.getUser()
           .then((user:UserSession) => {
             this.user = user;
-            this.followOrUnfollow();
-        });
-      });
+            if (isUserFollowing(this.user, this.initiativeid)) {
+              this.callToActionText = "Unfollow";
+            } else {
+              this.followOrUnfollow();
+            }
+          })
+      })
     }
     else {
       this.followOrUnfollow();
@@ -63,7 +67,6 @@ export class HubFollowButton {
       unfollowInitiative(this.initiativeid, this.user, this.session)
       this.callToActionText = "Follow";
     } else {
-      debugger;
       followInitiative(this.initiativeid, this.user, this.session);
       this.callToActionText = "Unfollow";
     }

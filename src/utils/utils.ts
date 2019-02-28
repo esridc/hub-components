@@ -34,8 +34,14 @@ export const unfollowInitiative = (initiativeId:string, user:IUser, authenticati
   // https://stackoverflow.com/questions/9792927/javascript-array-search-and-remove-string
   const index = user.tags.indexOf(tag);
   if (index !== -1) {
-      user.tags.splice(index, 1);
-   }
+    user.tags.splice(index, 1);
+  }
+
+  // the only way i know of to clear the last tag
+  if (user.tags.length === 0) {
+    user.tags.push(',')
+  }
+
   return request(getUpdateUrl(authentication), {
     params: { tags: user.tags },
     authentication
