@@ -6,12 +6,9 @@ const getTag = (initiativeId:string) => `hubInitiativeId|${initiativeId}`;
 
 const getUpdateUrl = (session:UserSession) => `${getPortalUrl(session)}/community/users/${session.username}/update`
 
-export const currentlyFollowedInitiatives = (user:IUser):string[] => 
-  user.tags.map(tag => tag.replace(/^hubInitiativeId\|/, ''));
+export const currentlyFollowedInitiatives = (user:IUser):string[] => user.tags.map(tag => tag.replace(/^hubInitiativeId\|/, ''));
 
-export const isUserFollowing = (initiativeId:string):boolean => {
-  return this.currentlyFollowedInitiatives.includes(initiativeId);
-}
+export const isUserFollowing = (user:IUser, initiativeId:string):boolean => currentlyFollowedInitiatives(user).includes(initiativeId);
 
 export const followInitiative = (initiativeId:string, user:IUser, authentication:UserSession):Promise<any> => {
   const tag = getTag(initiativeId);
@@ -23,7 +20,7 @@ export const followInitiative = (initiativeId:string, user:IUser, authentication
 
   return request(getUpdateUrl(authentication), {
     params: { tags: user.tags },
-    authentication 
+    authentication
   });
 }
 
@@ -31,7 +28,7 @@ export const unfollowInitiative = (initiativeId:string, user:IUser, authenticati
   const tag = getTag(initiativeId);
   // don't update if user isn't following
   if (!user.tags.includes(tag)) {
-    return Promise.reject(`user isnt following this initiative`);
+    return Promise.reject(`user is not following this initiative`);
   }
 
   // https://stackoverflow.com/questions/9792927/javascript-array-search-and-remove-string
@@ -39,9 +36,8 @@ export const unfollowInitiative = (initiativeId:string, user:IUser, authenticati
   if (index !== -1) {
       user.tags.splice(index, 1);
    }
-
   return request(getUpdateUrl(authentication), {
     params: { tags: user.tags },
-    authentication 
+    authentication
   });
 }

@@ -4,14 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>ArcGIS Hub Follow Button</title>
-  <!-- the css must be bundled somehow. whoa -->
+  <!-- the css is bundled somehow. whoa -->
   <script src="/build/hubfollowbutton.js"></script>
+  <style>
+    .parent {
+      display: flex;
+      height: 500px;
+    }
+
+    .child {
+      margin: auto;  /* Magic! */
+    }
+  </style>
 </head>
 <body>
-  <hub-follow-button
-    clientid="QVQNb3XfDzoboWS0"
-    initiativeid="1420cd1e4cb8461d95775d5e959bb802"
-  >
-  </hub-follow-button>
+  <div class="parent">
+    <hub-follow-button class="child"
+      clientid="QVQNb3XfDzoboWS0"
+      initiativeid="1420cd1e4cb8461d95775d5e959bb802">
+    </hub-follow-button>
+  </div>
 </body>
 </html>

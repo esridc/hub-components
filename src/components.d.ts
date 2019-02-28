@@ -9,6 +9,9 @@ import '@stencil/core';
 
 
 import {
+  IUser,
+} from '@esri/arcgis-rest-common-types';
+import {
   UserSession,
 } from '@esri/arcgis-rest-auth';
 
@@ -27,7 +30,11 @@ export namespace Components {
     /**
     * User metadata
     */
-    'user': UserSession;
+    'session': UserSession;
+    /**
+    * User metadata
+    */
+    'user': IUser;
   }
   interface HubFollowButtonAttributes extends StencilHTMLAttributes {
     /**
@@ -41,7 +48,11 @@ export namespace Components {
     /**
     * User metadata
     */
-    'user'?: UserSession;
+    'session'?: UserSession;
+    /**
+    * User metadata
+    */
+    'user'?: IUser;
   }
 }
 
