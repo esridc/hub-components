@@ -10,6 +10,14 @@ import { followInitiative, isUserFollowing, unfollowInitiative } from '../../uti
   shadow: true
 })
 
+/*
+to do:
+  could we suss out the community subdomain using initiativeid?
+  should we display a custom popup with facebook/google buttons only?
+  bonus:
+    notify org administrator about new follows
+    notify new follows with some canned info
+*/
 export class HubFollowButton {
   /**
    * ClientID to identify the app launching auth
@@ -20,6 +28,11 @@ export class HubFollowButton {
    * identifier for the ArcGIS Hub initiative
    */
   @Prop() initiativeid: string;
+
+  /**
+   * identifier for the ArcGIS Hub initiative
+   */
+  @Prop() communityorg: string;
 
   /**
    * User metadata
@@ -42,6 +55,7 @@ export class HubFollowButton {
     // register your own app to create a unique clientId
     UserSession.beginOAuth2({
       clientId: this.clientid,
+      portal: `${this.communityorg}/sharing/rest`,
       redirectUri: `${window.location}authenticate.html`
     })
       .then(session => {

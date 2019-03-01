@@ -20,15 +20,19 @@ export namespace Components {
 
   interface HubFollowButton {
     /**
-    * ClientID that identifies the app launching OAuth 2.0
+    * ClientID to identify the app launching auth
     */
     'clientid': string;
     /**
     * identifier for the ArcGIS Hub initiative
     */
+    'communityorg': string;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
     'initiativeid': string;
     /**
-    * User metadata
+    * Authentication info.
     */
     'session': UserSession;
     /**
@@ -38,15 +42,19 @@ export namespace Components {
   }
   interface HubFollowButtonAttributes extends StencilHTMLAttributes {
     /**
-    * ClientID that identifies the app launching OAuth 2.0
+    * ClientID to identify the app launching auth
     */
     'clientid'?: string;
     /**
     * identifier for the ArcGIS Hub initiative
     */
+    'communityorg'?: string;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
     'initiativeid'?: string;
     /**
-    * User metadata
+    * Authentication info.
     */
     'session'?: UserSession;
     /**
