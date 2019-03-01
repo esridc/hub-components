@@ -2,7 +2,7 @@ import { Component, Prop, State, Listen } from '@stencil/core';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import { IUser } from '@esri/arcgis-rest-common-types';
 
-import { followInitiative, isUserFollowing, unfollowInitiative } from '../../utils/utils';
+import { followInitiative, isUserFollowing, unfollowInitiative } from '../../utils/follow-utils';
 
 @Component({
   tag: 'hub-follow-button',
