@@ -47,7 +47,7 @@ export class HubFollowButton {
   /**
    * Text to display on the button
    */
-  @State() callToActionText: string = "Follow";
+  @State() callToActionText: string = "Follow Our Initiative";
 
   @Listen('click')
   handleKeyDown(){
@@ -64,7 +64,7 @@ export class HubFollowButton {
           .then((user:UserSession) => {
             this.user = user;
             if (isUserFollowing(this.user, this.initiativeid)) {
-              this.callToActionText = "Unfollow";
+              this.callToActionText = "Unfollow Our Inititiave";
             } else {
               this.followOrUnfollow();
             }
@@ -79,10 +79,10 @@ export class HubFollowButton {
   followOrUnfollow() {
     if (isUserFollowing(this.user, this.initiativeid)) {
       unfollowInitiative(this.initiativeid, this.user, this.session)
-      this.callToActionText = "Follow";
+      this.callToActionText = "Follow Our Initiative";
     } else {
       followInitiative(this.initiativeid, this.user, this.session);
-      this.callToActionText = "Unfollow";
+      this.callToActionText = "Unfollow Our Initiative";
     }
   }
 

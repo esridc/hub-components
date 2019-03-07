@@ -37,9 +37,9 @@ export const unfollowInitiative = (initiativeId:string, user:IUser, authenticati
     user.tags.splice(index, 1);
   }
 
-  // the only way i know of to clear the last tag
+  // we could clear the last tag by passing "," but less logic is required if we just substitue another real tag.
   if (user.tags.length === 0) {
-    user.tags.push(',')
+    user.tags.push('Independent thinker')
   }
 
   return request(getUpdateUrl(authentication), {
