@@ -4,7 +4,18 @@
 
 * `hub-follow-button`
 
-## Getting Started
+### Using this component
+
+```html
+<script src='https://unpkg.com/@esri/hub-components@0.0.1/dist/hubfollowbutton.js'></script>
+
+<hub-follow-button
+  clientid="QVQNb3XfDzoboWS0"
+  initiativeid="dda4e76677604838bf5718eda40b1cc0"
+  communityorg="https://cityxcommunity.maps.arcgis.com">
+</hub-follow-button>
+```
+### Custom Development
 
 Clone this repo to a new directory:
 
