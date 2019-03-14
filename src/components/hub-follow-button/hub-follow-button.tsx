@@ -2,7 +2,7 @@ import { Component, Prop, State, Listen } from '@stencil/core';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import { IUser } from '@esri/arcgis-rest-common-types';
 
-import { followInitiative, isUserFollowing, unfollowInitiative } from '../../utils/follow-utils';
+import { followInitiative, unfollowInitiative } from '@esri/hub-initiatives';
 
 @Component({
   tag: 'hub-follow-button',
@@ -45,6 +45,11 @@ export class HubFollowButton {
   @Prop({ mutable: true }) session: UserSession;
 
   /**
+   * Denotes whether the user is already following the configured initiative.
+   */
+  @Prop({ mutable: true }) following: boolean = false;
+
+  /**
    * Text to display on the button
    */
   @State() callToActionText: string = "Follow Our Initiative";
@@ -59,30 +64,53 @@ export class HubFollowButton {
       redirectUri: `${window.location}authenticate.html`
     })
       .then(session => {
-        this.session = session;
-        this.session.getUser()
-          .then((user:UserSession) => {
-            this.user = user;
-            if (isUserFollowing(this.user, this.initiativeid)) {
-              this.callToActionText = "Unfollow Our Inititiave";
-            } else {
-              this.followOrUnfollow();
-            }
-          })
+          this.session = session;
+          this.toggleFollow();
       })
-    }
-    else {
-      this.followOrUnfollow();
+    } else {
+      this.toggleFollow();
     }
   }
 
-  followOrUnfollow() {
-    if (isUserFollowing(this.user, this.initiativeid)) {
-      unfollowInitiative(this.initiativeid, this.user, this.session)
-      this.callToActionText = "Follow Our Initiative";
+  toggleFollow = () => {
+    if (!this.following) {
+      followInitiative({
+        initiativeId: this.initiativeid,
+        authentication: this.session
+      })
+      .then(response => {
+        if (response.success) {
+          Promise.resolve();
+        }
+      })
+      .catch(err => {
+        if (err === `user is already following this initiative.`) {
+          Promise.resolve();
+        }
+      })
+      .then(() => {
+        this.following = true;
+        this.callToActionText = "Unfollow Our Inititiave";
+      })
     } else {
-      followInitiative(this.initiativeid, this.user, this.session);
-      this.callToActionText = "Unfollow Our Initiative";
+      unfollowInitiative({
+        initiativeId: this.initiativeid,
+        authentication: this.session
+      })
+      .then(response => {
+        if (response.success) {
+          Promise.resolve();
+        }
+      })
+      .catch(err => {
+        if (err === `user is not following this initiative.`) {
+          Promise.resolve();
+        }
+      })
+      .then(() =>{
+        this.following = false;
+        this.callToActionText = "Follow Our Inititiave";
+      })
     }
   }
 

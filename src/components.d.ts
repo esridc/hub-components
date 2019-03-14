@@ -28,6 +28,10 @@ export namespace Components {
     */
     'communityorg': string;
     /**
+    * Denotes whether the user is already following the configured initiative.
+    */
+    'following': boolean;
+    /**
     * identifier for the ArcGIS Hub initiative
     */
     'initiativeid': string;
@@ -49,6 +53,10 @@ export namespace Components {
     * identifier for the ArcGIS Hub initiative
     */
     'communityorg'?: string;
+    /**
+    * Denotes whether the user is already following the configured initiative.
+    */
+    'following'?: boolean;
     /**
     * identifier for the ArcGIS Hub initiative
     */
