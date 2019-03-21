@@ -15,7 +15,7 @@
       );
       const clientId = match[1];
       let session;
-      
+
       function processAuthentication() {
         // hub auth adds a little sugar to make the user public
         session = arcgisHub.completeOAuth2({
@@ -24,7 +24,6 @@
           .then(() => {
             window.location.href = './';
           })
-        // localStorage.setItem('__ARCGIS_REST_USER_SESSION__', session.serialize());
       }
       processAuthentication();
     </script>
