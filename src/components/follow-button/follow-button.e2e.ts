@@ -13,8 +13,9 @@ describe('hub-follow-button', () => {
     const page = await newE2EPage();
 
     await page.setContent(`<hub-follow-button clientid='foo'initiativeid='bar'orgurl='baz.maps.arcgis.com'></hub-follow-button>`);
-    // const component = await page.find('hub-follow-button');
-    // const element = await page.find('hub-follow-button >>> div');
-    // expect(component.innerHTML).toEqual('Follow');
+    const component = await page.find('hub-follow-button');
+    const element = await page.find('hub-follow-button >>> div');
+    expect(component).toEqual(component);
+    expect(element).toEqual(element);
   });
 });

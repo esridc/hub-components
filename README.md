@@ -2,7 +2,7 @@
 
 # Web Components for ArcGIS Hub
 
-* `follow-button`
+* `<hub-follow-button>`
 
 ![demo](screenshot.gif)
 

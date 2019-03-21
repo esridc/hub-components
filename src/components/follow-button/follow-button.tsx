@@ -12,8 +12,7 @@ import { followInitiative, unfollowInitiative } from '@esri/hub-initiatives';
 
 /*
 to do:
-  could we suss out the community subdomain using initiativeid?
-  should we display a custom popup with facebook/google buttons only?
+  could we suss out the enterprise org url using initiativeid?
   bonus:
     notify org administrator about new follows
     notify new follows with some canned info
@@ -67,9 +66,7 @@ export class HubFollowButton {
           this.session = session;
           this.toggleFollow();
       })
-    } else {
-      this.toggleFollow();
-    }
+    } else this.toggleFollow();
   }
 
   toggleFollow = () => {
@@ -79,14 +76,10 @@ export class HubFollowButton {
         authentication: this.session
       })
       .then(response => {
-        if (response.success) {
-          Promise.resolve();
-        }
+        if (response.success) Promise.resolve();
       })
       .catch(err => {
-        if (err === `user is already following this initiative.`) {
-          Promise.resolve();
-        }
+        if (err === `user is already following this initiative.`)  Promise.resolve();
       })
       .then(() => {
         this.following = true;
@@ -98,14 +91,10 @@ export class HubFollowButton {
         authentication: this.session
       })
       .then(response => {
-        if (response.success) {
-          Promise.resolve();
-        }
+        if (response.success) Promise.resolve();
       })
       .catch(err => {
-        if (err === `user is not following this initiative.`) {
-          Promise.resolve();
-        }
+        if (err === `user is not following this initiative.`) Promise.resolve();
       })
       .then(() =>{
         this.following = false;
