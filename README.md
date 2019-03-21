@@ -4,6 +4,8 @@
 
 * `follow-button`
 
+![demo](screenshot.gif)
+
 ### Using this component
 
 ```html
