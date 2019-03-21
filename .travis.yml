@@ -1,0 +1,26 @@
+language: node_js
+sudo: false
+notifications:
+  email: false
+node_js:
+- 'node'
+cache: npm
+script:
+- npm test
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: "$GITHUB_TOKEN"
+  keep-history: true
+  on:
+    branch: master
+  local-dir: www
+before_deploy:
+- npm run build
+env:
+- MOZ_HEADLESS=1
+addons:
+  chrome: stable
+branches:
+  only:
+    - master
