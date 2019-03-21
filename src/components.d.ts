@@ -24,10 +24,6 @@ export namespace Components {
     */
     'clientid': string;
     /**
-    * identifier for the ArcGIS Hub initiative
-    */
-    'communityorg': string;
-    /**
     * Denotes whether the user is already following the configured initiative.
     */
     'following': boolean;
@@ -35,6 +31,10 @@ export namespace Components {
     * identifier for the ArcGIS Hub initiative
     */
     'initiativeid': string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl': string;
     /**
     * Authentication info.
     */
@@ -50,10 +50,6 @@ export namespace Components {
     */
     'clientid'?: string;
     /**
-    * identifier for the ArcGIS Hub initiative
-    */
-    'communityorg'?: string;
-    /**
     * Denotes whether the user is already following the configured initiative.
     */
     'following'?: boolean;
@@ -61,6 +57,10 @@ export namespace Components {
     * identifier for the ArcGIS Hub initiative
     */
     'initiativeid'?: string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl'?: string;
     /**
     * Authentication info.
     */

@@ -6,7 +6,7 @@ import { followInitiative, unfollowInitiative } from '@esri/hub-initiatives';
 
 @Component({
   tag: 'hub-follow-button',
-  styleUrl: 'hub-follow-button.css',
+  styleUrl: 'follow-button.css',
   shadow: true
 })
 
@@ -30,9 +30,9 @@ export class HubFollowButton {
   @Prop() initiativeid: string;
 
   /**
-   * identifier for the ArcGIS Hub initiative
+   * url of the ArcGIS Online organization
    */
-  @Prop() communityorg: string;
+  @Prop() orgurl: string = `https://www.arcgis.com`;
 
   /**
    * User metadata
@@ -60,7 +60,7 @@ export class HubFollowButton {
     // register your own app to create a unique clientId
     UserSession.beginOAuth2({
       clientId: this.clientid,
-      portal: `${this.communityorg}/sharing/rest`,
+      portal: `${this.orgurl}/sharing/rest`,
       redirectUri: `${window.location}authenticate.html`
     })
       .then(session => {

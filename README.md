@@ -2,17 +2,17 @@
 
 # Web Components for ArcGIS Hub
 
-* `hub-follow-button`
+* `follow-button`
 
 ### Using this component
 
 ```html
-<script src='https://unpkg.com/@esri/hub-components@0.0.1/dist/hubfollowbutton.js'></script>
+<script src='https://unpkg.com/@esri/hub-components@0.0.1/dist/arcgishub.js'></script>
 
 <hub-follow-button
   clientid="QVQNb3XfDzoboWS0"
   initiativeid="dda4e76677604838bf5718eda40b1cc0"
-  communityorg="https://cityxcommunity.maps.arcgis.com">
+  orgurl="https://cityx.maps.arcgis.com">
 </hub-follow-button>
 ```
 ### Custom Development

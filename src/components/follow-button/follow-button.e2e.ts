@@ -9,10 +9,10 @@ describe('hub-follow-button', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-  it('renders changes to the name data', async () => {
+  it('renders changes to the button', async () => {
     const page = await newE2EPage();
 
-    await page.setContent(`<hub-follow-button clientid='foo'initiativeid='bar'communityorg='baz.maps.arcgis.com'></hub-follow-button>`);
+    await page.setContent(`<hub-follow-button clientid='foo'initiativeid='bar'orgurl='baz.maps.arcgis.com'></hub-follow-button>`);
     // const component = await page.find('hub-follow-button');
     // const element = await page.find('hub-follow-button >>> div');
     // expect(component.innerHTML).toEqual('Follow');

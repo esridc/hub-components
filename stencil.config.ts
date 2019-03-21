@@ -1,7 +1,7 @@
 import { Config } from '@stencil/core';
 
 export const config: Config = {
-  namespace: 'hubfollowbutton',
+  namespace: 'arcgishub',
   outputTargets:[
     { type: 'dist' },
     { type: 'docs' },
