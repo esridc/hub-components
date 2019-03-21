@@ -20,8 +20,11 @@
     "@esri/arcgis-rest-request": "^1.18.0",
     "@esri/arcgis-rest-common-types": "^1.18.0",
     "@esri/arcgis-rest-auth": "^1.18.0",
-    "@esri/hub-auth": "^1.8.2",
-    "@esri/hub-initiatives": "^1.8.2"
+    "@esri/hub-auth": "^1.9.0",
+    "@esri/hub-initiatives": "^1.9.0",
+    "@esri/hub-common": "^1.9.0",
+    "@esri/hub-sites": "^1.9.0",
+    "@esri/hub-domains": "^1.9.0"
   },
   "devDependencies": {
     "@stencil/core": "~0.16.2",
