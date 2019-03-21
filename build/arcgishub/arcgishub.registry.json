@@ -1,0 +1,15 @@
+{
+  "namespace": "arcgishub",
+  "fsNamespace": "arcgishub",
+  "loader": "../arcgishub.js",
+  "core": "arcgishub.tgscosid.js",
+  "corePolyfilled": "arcgishub.abjyuknk.js",
+  "components": {
+    "hub-follow-button": {
+      "bundleIds": {
+        "$": "mptn86c4"
+      },
+      "encapsulation": "shadow"
+    }
+  }
+}
