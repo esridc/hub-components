@@ -1,0 +1,10 @@
+.event-details-component {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  color: #323232;
+  font-size: 14px;
+  width: 400px;
+  height: 400px;
+}

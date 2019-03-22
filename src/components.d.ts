@@ -18,7 +18,52 @@ import {
 
 export namespace Components {
 
-  interface HubFollowButton {
+  interface HubEventDetails {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid': string;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
+    'eventid': string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl': string;
+    /**
+    * Authentication info.
+    */
+    'session': UserSession;
+    /**
+    * User metadata
+    */
+    'user': IUser;
+  }
+  interface HubEventDetailsAttributes extends StencilHTMLAttributes {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid'?: string;
+    /**
+    * identifier for the ArcGIS Hub initiative
+    */
+    'eventid'?: string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl'?: string;
+    /**
+    * Authentication info.
+    */
+    'session'?: UserSession;
+    /**
+    * User metadata
+    */
+    'user'?: IUser;
+  }
+
+  interface HubFollowInitiative {
     /**
     * ClientID to identify the app launching auth
     */
@@ -27,6 +72,10 @@ export namespace Components {
     * Denotes whether the user is already following the configured initiative.
     */
     'following': boolean;
+    /**
+    * Follow icon
+    */
+    'icon': JSX.Element;
     /**
     * identifier for the ArcGIS Hub initiative
     */
@@ -44,7 +93,7 @@ export namespace Components {
     */
     'user': IUser;
   }
-  interface HubFollowButtonAttributes extends StencilHTMLAttributes {
+  interface HubFollowInitiativeAttributes extends StencilHTMLAttributes {
     /**
     * ClientID to identify the app launching auth
     */
@@ -53,6 +102,10 @@ export namespace Components {
     * Denotes whether the user is already following the configured initiative.
     */
     'following'?: boolean;
+    /**
+    * Follow icon
+    */
+    'icon'?: JSX.Element;
     /**
     * identifier for the ArcGIS Hub initiative
     */
@@ -70,30 +123,79 @@ export namespace Components {
     */
     'user'?: IUser;
   }
+
+  interface HubButton {
+    /**
+    * action to trigger when the button is clicked
+    */
+    'action': Function;
+    /**
+    * Icon to display alonside the text
+    */
+    'icon': JSX.Element;
+    /**
+    * Button text to display
+    */
+    'text': string;
+  }
+  interface HubButtonAttributes extends StencilHTMLAttributes {
+    /**
+    * action to trigger when the button is clicked
+    */
+    'action'?: Function;
+    /**
+    * Icon to display alonside the text
+    */
+    'icon'?: JSX.Element;
+    /**
+    * Button text to display
+    */
+    'text'?: string;
+  }
 }
 
 declare global {
   interface StencilElementInterfaces {
-    'HubFollowButton': Components.HubFollowButton;
+    'HubEventDetails': Components.HubEventDetails;
+    'HubFollowInitiative': Components.HubFollowInitiative;
+    'HubButton': Components.HubButton;
   }
 
   interface StencilIntrinsicElements {
-    'hub-follow-button': Components.HubFollowButtonAttributes;
+    'hub-event-details': Components.HubEventDetailsAttributes;
+    'hub-follow-initiative': Components.HubFollowInitiativeAttributes;
+    'hub-button': Components.HubButtonAttributes;
   }
 
 
-  interface HTMLHubFollowButtonElement extends Components.HubFollowButton, HTMLStencilElement {}
-  var HTMLHubFollowButtonElement: {
-    prototype: HTMLHubFollowButtonElement;
-    new (): HTMLHubFollowButtonElement;
+  interface HTMLHubEventDetailsElement extends Components.HubEventDetails, HTMLStencilElement {}
+  var HTMLHubEventDetailsElement: {
+    prototype: HTMLHubEventDetailsElement;
+    new (): HTMLHubEventDetailsElement;
+  };
+
+  interface HTMLHubFollowInitiativeElement extends Components.HubFollowInitiative, HTMLStencilElement {}
+  var HTMLHubFollowInitiativeElement: {
+    prototype: HTMLHubFollowInitiativeElement;
+    new (): HTMLHubFollowInitiativeElement;
+  };
+
+  interface HTMLHubButtonElement extends Components.HubButton, HTMLStencilElement {}
+  var HTMLHubButtonElement: {
+    prototype: HTMLHubButtonElement;
+    new (): HTMLHubButtonElement;
   };
 
   interface HTMLElementTagNameMap {
-    'hub-follow-button': HTMLHubFollowButtonElement
+    'hub-event-details': HTMLHubEventDetailsElement
+    'hub-follow-initiative': HTMLHubFollowInitiativeElement
+    'hub-button': HTMLHubButtonElement
   }
 
   interface ElementTagNameMap {
-    'hub-follow-button': HTMLHubFollowButtonElement;
+    'hub-event-details': HTMLHubEventDetailsElement;
+    'hub-follow-initiative': HTMLHubFollowInitiativeElement;
+    'hub-button': HTMLHubButtonElement;
   }
 
 
