@@ -20,9 +20,12 @@ export namespace Components {
 
   interface HubEventDetails {
     /**
-    * ClientID to identify the app launching auth
+    * ClientID to identify the app launching OAuth
     */
     'clientid': string;
+    'eventDate': string;
+    'eventOrganizer': JSX.Element;
+    'eventTitle': string;
     /**
     * identifier for the ArcGIS Hub initiative
     */
@@ -42,9 +45,12 @@ export namespace Components {
   }
   interface HubEventDetailsAttributes extends StencilHTMLAttributes {
     /**
-    * ClientID to identify the app launching auth
+    * ClientID to identify the app launching OAuth
     */
     'clientid'?: string;
+    'eventDate'?: string;
+    'eventOrganizer'?: JSX.Element;
+    'eventTitle'?: string;
     /**
     * identifier for the ArcGIS Hub initiative
     */

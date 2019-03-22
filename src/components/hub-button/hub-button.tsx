@@ -26,7 +26,7 @@ export class HubButton {
   }
 
   render() {
-    return <button class="btn">
+    return <button class="hub-btn">
         {this.icon}
         {this.text}
       </button>;

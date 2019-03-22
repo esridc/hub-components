@@ -1,10 +1,30 @@
-.event-details-component {
-  background-color: #fff;
+.hub-event-details {
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
   color: #323232;
   font-size: 14px;
-  width: 400px;
+  width: 380px;
   height: 400px;
+  font-family: 'Courier New', Courier, monospace;
+  display: grid;
+  grid-template-columns: 10% auto;
+  grid-template-rows: 40% 40% 20%;
+  grid-template-areas:
+    "header header"
+    ". main"
+    ". footer";
+}
+
+.hub-event-background-image {
+  background-color: rgb(255, 174, 0);
+  grid-area: header;
+}
+
+.hub-event-content {
+  grid-area: main;
+}
+
+.hub-event-footer {
+  grid-area: footer;
 }

@@ -7,7 +7,6 @@ import { followInitiative, unfollowInitiative } from '@esri/hub-initiatives';
 @Component({
   tag: 'hub-follow-initiative',
   styleUrl: 'follow-initiative.css',
-  shadow: true
 })
 
 /*
