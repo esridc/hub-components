@@ -7,13 +7,11 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                 | Type          | Default                    |
-| ---------- | ---------- | ------------------------------------------- | ------------- | -------------------------- |
-| `clientid` | `clientid` | ClientID to identify the app launching auth | `string`      | `undefined`                |
-| `eventid`  | `eventid`  | identifier for the ArcGIS Hub initiative    | `string`      | `undefined`                |
-| `orgurl`   | `orgurl`   | url of the ArcGIS Online organization       | `string`      | ``https://www.arcgis.com`` |
-| `session`  | --         | Authentication info.                        | `UserSession` | `undefined`                |
-| `user`     | --         | User metadata                               | `IUser`       | `undefined`                |
+| Property | Attribute | Description                                  | Type       | Default                       |
+| -------- | --------- | -------------------------------------------- | ---------- | ----------------------------- |
+| `action` | --        | action to trigger when the button is clicked | `Function` | `function() { return 'foo' }` |
+| `icon`   | `icon`    | Icon to display alonside the text            | `any`      | `<span></span>`               |
+| `text`   | `text`    | Button text to display                       | `string`   | `undefined`                   |
 
 
 ----------------------------------------------

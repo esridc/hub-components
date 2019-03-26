@@ -1,21 +1,19 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-describe('hub-follow-button', () => {
+import { HubButton } from './hub-button';
+
+describe('hub-button', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<hub-follow-button></hub-follow-button>');
-    const element = await page.find('hub-follow-button');
+    await page.setContent(`<hub-button text="click me!"></hub-button>`);
+    const element = await page.find('hub-button');
     expect(element).toHaveClass('hydrated');
+    expect(element.innerText).toBe('click me!');
   });
 
-  it('renders changes to the button', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(`<hub-follow-button clientid='foo'initiativeid='bar'orgurl='baz.maps.arcgis.com'></hub-follow-button>`);
-    const component = await page.find('hub-follow-button');
-    const element = await page.find('hub-follow-button >>> div');
-    expect(component).toEqual(component);
-    expect(element).toEqual(element);
+  it('should do something useless by default when folks click on the button', () => {
+    const hub = new HubButton();
+    expect(hub.action()).toEqual('foo');
   });
 });

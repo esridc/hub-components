@@ -1,10 +1,12 @@
 import { Component, Prop, State } from '@stencil/core';
-import { UserSession } from '@esri/arcgis-rest-auth';
-import { IUser } from '@esri/arcgis-rest-common-types';
 
+import { getPortal } from '@esri/arcgis-rest-request';
+import { UserSession } from '@esri/arcgis-rest-auth';
 import {
-  // searchEvents,
-  registerForEvent
+  getEventServiceUrl,
+  searchEvents,
+  registerForEvent,
+  unregisterForEvent
 } from '@esri/hub-events';
 
 @Component({
@@ -14,7 +16,7 @@ import {
 
 /*
 to do:
-  hydrate card with event metadata
+  figure out the bare minimum we can ask for in config
   new logic in hub.js to actually register
 */
 export class HubEventDetails {
@@ -26,17 +28,12 @@ export class HubEventDetails {
   /**
    * identifier for the ArcGIS Hub initiative
    */
-  @Prop() eventid: string;
+  @Prop() eventtitle: string;
 
   /**
    * url of the ArcGIS Online organization
    */
   @Prop() orgurl: string = `https://www.arcgis.com`;
-
-  /**
-   * User metadata
-   */
-  @Prop({ mutable: true }) user: IUser;
 
   /**
    * Authentication info.
@@ -46,17 +43,27 @@ export class HubEventDetails {
   /**
    *
    */
-  @Prop({ mutable: true }) eventTitle: string = "Event Title";
+  @Prop({ mutable: true }) eventDate: string;
 
   /**
    *
    */
-  @Prop({ mutable: true }) eventDate: string = "Tomorrow @ 3:00pm";
+  @Prop({ mutable: true }) eventOrganizer: JSX.Element;
 
   /**
    *
    */
-  @Prop({ mutable: true }) eventOrganizer: JSX.Element = <a href="https://twitter.com/geogangster">John G</a>;
+  @Prop({ mutable: true }) eventServiceUrl: string;
+
+  /**
+   *
+   */
+  @Prop({ mutable: true }) eventGroupId: string;
+
+  /**
+   *
+   */
+  @Prop({ mutable: true }) attending: boolean;
 
   /**
    * Text to display on the button
@@ -76,37 +83,81 @@ export class HubEventDetails {
             this.triggerRegister();
         })
       } else {
-        registerForEvent({
-          eventId: this.eventid,
-          authentication: this.session
-        })
-          .then(response => {
-            console.log(response);
-            this.callToActionText === "Attend" ? this.callToActionText = "Attending" : this.callToActionText = "Attend";
+        if (!this.attending) {
+          registerForEvent({
+            groupId: this.eventGroupId,
+            authentication: this.session
           })
+            .then(response => {
+              if (response.success === true) {
+                return Promise.resolve();
+              }
+            })
+            .catch(err => {
+              if (err.originalMessage === "User is already a member of group.") {
+                return Promise.resolve();
+              }
+            })
+            .then(() => {
+              this.callToActionText = "Attending";
+              this.attending = true;
+            })
+        } else {
+          unregisterForEvent({
+            groupId: this.eventGroupId,
+            authentication: this.session
+          })
+            .then(response => {
+              if (response.success === true) {
+                this.callToActionText = "Attend";
+                this.attending = false;
+              }
+            })
+        }
       }
   }
 
-  hydrateDetails = () => {
-    // searchEvents({
-    //   url: ""
-    // })
-    //   .then(() => {
+  componentDidLoad() {
+    getPortal(null, {
+      portal: `${this.orgurl}/sharing/rest/`
+    })
+      .then(response => {
+        getEventServiceUrl(response.id)
+          .then(url => {
+            this.eventServiceUrl = url;
+            searchEvents({ url: this.eventServiceUrl })
+              .then(response => {
+                if (response.data.length > 0) {
+                  for (let i=0; i<response.data.length;i++) {
+                    if (response.data[i].attributes.title === this.eventtitle) {
+                      const eventDetails = response.data[i].attributes;
+                      this.eventDate = new Date(eventDetails.startDate).toString();
+                      this.eventGroupId = eventDetails.groupId;
+                      this.eventOrganizer = this.digOutContactInfo(eventDetails);
+                      break;
+                    }
+                  }
+                }
+              })
+          })
+        })
+  }
 
-    //   })
-    // this.eventTitle = "";
-    // this.eventDate = "";
-    // this.eventOrganizer = "";
+  digOutContactInfo(details:any):JSX.Element {
+    const organizers:any = JSON.parse(details.organizers);
+    if (organizers.length > 0) {
+      const contact = `mailto:${organizers[0].contact}`
+      return <p>organized by: <a href={contact}>{organizers[0].name}</a></p>
+    }
   }
 
   render() {
-    this.hydrateDetails();
     return <div class="hub-event-details">
       <div class="hub-event-background-image"></div>
       <div class="hub-event-content">
-        <h2>{this.eventTitle}</h2>
+        <h2>{this.eventtitle}</h2>
         <p>{this.eventDate}</p>
-        <p>organized by: {this.eventOrganizer}</p>
+        <p>{this.eventOrganizer}</p>
       </div>
       <div class="hub-event-footer">
         <hub-button

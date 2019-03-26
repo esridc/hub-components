@@ -9,27 +9,29 @@ import '@stencil/core';
 
 
 import {
-  IUser,
-} from '@esri/arcgis-rest-common-types';
-import {
   UserSession,
 } from '@esri/arcgis-rest-auth';
+import {
+  IUser,
+} from '@esri/arcgis-rest-common-types';
 
 
 export namespace Components {
 
   interface HubEventDetails {
+    'attending': boolean;
     /**
     * ClientID to identify the app launching OAuth
     */
     'clientid': string;
     'eventDate': string;
+    'eventGroupId': string;
     'eventOrganizer': JSX.Element;
-    'eventTitle': string;
+    'eventServiceUrl': string;
     /**
     * identifier for the ArcGIS Hub initiative
     */
-    'eventid': string;
+    'eventtitle': string;
     /**
     * url of the ArcGIS Online organization
     */
@@ -38,23 +40,21 @@ export namespace Components {
     * Authentication info.
     */
     'session': UserSession;
-    /**
-    * User metadata
-    */
-    'user': IUser;
   }
   interface HubEventDetailsAttributes extends StencilHTMLAttributes {
+    'attending'?: boolean;
     /**
     * ClientID to identify the app launching OAuth
     */
     'clientid'?: string;
     'eventDate'?: string;
+    'eventGroupId'?: string;
     'eventOrganizer'?: JSX.Element;
-    'eventTitle'?: string;
+    'eventServiceUrl'?: string;
     /**
     * identifier for the ArcGIS Hub initiative
     */
-    'eventid'?: string;
+    'eventtitle'?: string;
     /**
     * url of the ArcGIS Online organization
     */
@@ -63,10 +63,6 @@ export namespace Components {
     * Authentication info.
     */
     'session'?: UserSession;
-    /**
-    * User metadata
-    */
-    'user'?: IUser;
   }
 
   interface HubFollowInitiative {

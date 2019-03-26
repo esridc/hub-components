@@ -12,14 +12,14 @@ export class HubButton {
   @Prop({ mutable: true }) text: string;
 
   /**
-   * Icon to display alonside the text
+   * Icon to display alongside the text
    */
-  @Prop() icon: JSX.Element;
+  @Prop() icon: JSX.Element = <span></span>;
 
   /**
    * action to trigger when the button is clicked
    */
-  @Prop() action: Function = function(){ return 'foo' };
+  @Prop() action: Function = function() { return 'foo' };
 
   @Listen('click') handleKeyDown() {
     this.action()

@@ -58,51 +58,54 @@ export class HubFollowInitiative {
    */
   @State() callToActionText: string = "Follow Our Initiative";
 
-  triggerFollow = () => {
-  if (!this.session) {
-    // register your own app to create a unique clientId
-    UserSession.beginOAuth2({
-      clientId: this.clientid,
-      portal: `${this.orgurl}/sharing/rest`,
-      redirectUri: `${window.location}authenticate.html`
-    })
-      .then(session => {
-          this.session = session;
-          this.toggleFollow();
+  triggerFollow = ():Promise<any> => {
+    if (!this.session) {
+      // register your own app to create a unique clientId
+      UserSession.beginOAuth2({
+        clientId: this.clientid,
+        portal: `${this.orgurl}/sharing/rest`,
+        redirectUri: `${window.location}authenticate.html`
       })
-    } else this.toggleFollow();
+        .then(session => {
+            debugger;
+            this.session = session;
+            return this.toggleFollow();
+        })
+      } else return this.toggleFollow();
   }
 
-  toggleFollow = () => {
+  toggleFollow = ():Promise<Boolean> => {
     if (!this.following) {
-      followInitiative({
+      return followInitiative({
         initiativeId: this.initiativeid,
         authentication: this.session
       })
       .then(response => {
-        if (response.success) Promise.resolve();
+        if (response.success) return Promise.resolve();
       })
       .catch(err => {
-        if (err === `user is already following this initiative.`)  Promise.resolve();
+        if (err === `user is already following this initiative.`)  return Promise.resolve();
       })
       .then(() => {
+        this.callToActionText = "Unfollow Our Initiative";
         this.following = true;
-        this.callToActionText = "Unfollow Our Inititiave";
+        return this.following;
       })
     } else {
-      unfollowInitiative({
+      return unfollowInitiative({
         initiativeId: this.initiativeid,
         authentication: this.session
       })
       .then(response => {
-        if (response.success) Promise.resolve();
+        if (response.success) return Promise.resolve();
       })
       .catch(err => {
-        if (err === `user is not following this initiative.`) Promise.resolve();
+        if (err === `user is not following this initiative.`) return Promise.resolve();
       })
       .then(() =>{
+        this.callToActionText = "Follow Our Initiative";
         this.following = false;
-        this.callToActionText = "Follow Our Inititiave";
+        return this.following;
       })
     }
   }
