@@ -44,9 +44,9 @@ export class HubFollowInitiative {
   @Prop({ mutable: true }) user: IUser;
 
   /**
-   * Authentication info.
+   * Serialized authentication information.
    */
-  @Prop({ mutable: true }) session: UserSession;
+  @Prop({ mutable: true }) session: string;
 
   /**
    * Denotes whether the user is already following the configured initiative.
@@ -61,27 +61,26 @@ export class HubFollowInitiative {
   triggerFollow = ():Promise<any> => {
     if (!this.session) {
       // register your own app to create a unique clientId
-      UserSession.beginOAuth2({
+      return UserSession.beginOAuth2({
         clientId: this.clientid,
         portal: `${this.orgurl}/sharing/rest`,
         redirectUri: `${window.location}authenticate.html`
       })
         .then(session => {
-            debugger;
-            this.session = session;
+            this.session = session.serialize();
             return this.toggleFollow();
         })
       } else return this.toggleFollow();
   }
 
-  toggleFollow = ():Promise<Boolean> => {
+  toggleFollow = ():Promise<{ success: boolean }> => {
     if (!this.following) {
       return followInitiative({
         initiativeId: this.initiativeid,
-        authentication: this.session
+        authentication: UserSession.deserialize(this.session)
       })
       .then(response => {
-        if (response.success) return Promise.resolve();
+        if (response.success) return Promise.resolve(response);
       })
       .catch(err => {
         if (err === `user is already following this initiative.`)  return Promise.resolve();
@@ -89,12 +88,12 @@ export class HubFollowInitiative {
       .then(() => {
         this.callToActionText = "Unfollow Our Initiative";
         this.following = true;
-        return this.following;
+        return { success: true }
       })
     } else {
       return unfollowInitiative({
         initiativeId: this.initiativeid,
-        authentication: this.session
+        authentication: UserSession.deserialize(this.session)
       })
       .then(response => {
         if (response.success) return Promise.resolve();
@@ -105,7 +104,7 @@ export class HubFollowInitiative {
       .then(() =>{
         this.callToActionText = "Follow Our Initiative";
         this.following = false;
-        return this.following;
+        return { success: true }
       })
     }
   }

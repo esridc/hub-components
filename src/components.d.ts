@@ -9,9 +9,6 @@ import '@stencil/core';
 
 
 import {
-  UserSession,
-} from '@esri/arcgis-rest-auth';
-import {
   IUser,
 } from '@esri/arcgis-rest-common-types';
 
@@ -37,9 +34,9 @@ export namespace Components {
     */
     'orgurl': string;
     /**
-    * Authentication info.
+    * Serialized authentication information.
     */
-    'session': UserSession;
+    'session': string;
   }
   interface HubEventDetailsAttributes extends StencilHTMLAttributes {
     'attending'?: boolean;
@@ -60,9 +57,9 @@ export namespace Components {
     */
     'orgurl'?: string;
     /**
-    * Authentication info.
+    * Serialized authentication information.
     */
-    'session'?: UserSession;
+    'session'?: string;
   }
 
   interface HubFollowInitiative {
@@ -87,9 +84,9 @@ export namespace Components {
     */
     'orgurl': string;
     /**
-    * Authentication info.
+    * Serialized authentication information.
     */
-    'session': UserSession;
+    'session': string;
     /**
     * User metadata
     */
@@ -117,9 +114,9 @@ export namespace Components {
     */
     'orgurl'?: string;
     /**
-    * Authentication info.
+    * Serialized authentication information.
     */
-    'session'?: UserSession;
+    'session'?: string;
     /**
     * User metadata
     */
@@ -132,7 +129,7 @@ export namespace Components {
     */
     'action': Function;
     /**
-    * Icon to display alonside the text
+    * Icon to display alongside the text
     */
     'icon': JSX.Element;
     /**
@@ -146,7 +143,7 @@ export namespace Components {
     */
     'action'?: Function;
     /**
-    * Icon to display alonside the text
+    * Icon to display alongside the text
     */
     'icon'?: JSX.Element;
     /**

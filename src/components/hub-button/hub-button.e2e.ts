@@ -12,8 +12,9 @@ describe('hub-button', () => {
     expect(element.innerText).toBe('click me!');
   });
 
-  it('should do something useless by default when folks click on the button', () => {
+  it('should do something when folks click on the button', () => {
     const hub = new HubButton();
+    expect(hub.text).toEqual(undefined);
     expect(hub.action()).toEqual('foo');
   });
 });

@@ -14,7 +14,7 @@ export class HubButton {
   /**
    * Icon to display alongside the text
    */
-  @Prop() icon: JSX.Element = <span></span>;
+  @Prop() icon: JSX.Element;
 
   /**
    * action to trigger when the button is clicked

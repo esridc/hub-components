@@ -36,9 +36,9 @@ export class HubEventDetails {
   @Prop() orgurl: string = `https://www.arcgis.com`;
 
   /**
-   * Authentication info.
+   * Serialized authentication information.
    */
-  @Prop({ mutable: true }) session: UserSession;
+  @Prop({ mutable: true }) session: string;
 
   /**
    *
@@ -70,7 +70,7 @@ export class HubEventDetails {
    */
   @State() callToActionText: string = "Attend";
 
-  triggerRegister = () => {
+  triggerRegister = ():Promise<any> => {
     if (!this.session) {
       // register your own app to create a unique clientId
       UserSession.beginOAuth2({
@@ -79,42 +79,50 @@ export class HubEventDetails {
         redirectUri: `${window.location}authenticate.html`
       })
         .then(session => {
-            this.session = session;
-            this.triggerRegister();
+            this.session = session.serialize();
+            return this.toggleRegister();
         })
-      } else {
-        if (!this.attending) {
-          registerForEvent({
-            groupId: this.eventGroupId,
-            authentication: this.session
-          })
-            .then(response => {
-              if (response.success === true) {
-                return Promise.resolve();
-              }
-            })
-            .catch(err => {
-              if (err.originalMessage === "User is already a member of group.") {
-                return Promise.resolve();
-              }
-            })
-            .then(() => {
-              this.callToActionText = "Attending";
-              this.attending = true;
-            })
-        } else {
-          unregisterForEvent({
-            groupId: this.eventGroupId,
-            authentication: this.session
-          })
-            .then(response => {
-              if (response.success === true) {
-                this.callToActionText = "Attend";
-                this.attending = false;
-              }
-            })
-        }
-      }
+    } else {
+      return this.toggleRegister();
+    }
+  }
+
+  toggleRegister = ():Promise<{ success: boolean }> => {
+    if (!this.attending) {
+      return registerForEvent({
+        groupId: this.eventGroupId,
+        authentication: UserSession.deserialize(this.session)
+      })
+        .then(response => {
+          if (response.success === true) {
+            return Promise.resolve();
+          }
+        })
+        .catch(err => {
+          if (err.originalMessage === "User is already a member of group.") {
+            return Promise.resolve();
+          }
+          else throw err;
+        })
+        .then(() => {
+          this.callToActionText = "Attending";
+          this.attending = true;
+          return { success: true };
+        })
+    } else {
+      return unregisterForEvent({
+        groupId: this.eventGroupId,
+        authentication: UserSession.deserialize(this.session)
+      })
+        .then(response => {
+          if (response.success === true) {
+            this.callToActionText = "Attend";
+            this.attending = false;
+            return { success: true }
+          }
+          else return { success: false }
+        })
+    }
   }
 
   componentDidLoad() {
