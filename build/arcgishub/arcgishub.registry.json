@@ -2,14 +2,23 @@
   "namespace": "arcgishub",
   "fsNamespace": "arcgishub",
   "loader": "../arcgishub.js",
-  "core": "arcgishub.tgscosid.js",
-  "corePolyfilled": "arcgishub.abjyuknk.js",
+  "core": "arcgishub.gj1j2yls.js",
+  "corePolyfilled": "arcgishub.a9wa7b4l.js",
   "components": {
-    "hub-follow-button": {
+    "hub-button": {
       "bundleIds": {
-        "$": "mptn86c4"
-      },
-      "encapsulation": "shadow"
+        "$": "wyis0tyk"
+      }
+    },
+    "hub-event-details": {
+      "bundleIds": {
+        "$": "qky8xmvw"
+      }
+    },
+    "hub-follow-initiative": {
+      "bundleIds": {
+        "$": "r802awiz"
+      }
     }
   }
 }
