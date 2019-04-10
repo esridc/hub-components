@@ -3,28 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
-  <title>ArcGIS Hub Follow Button</title>
+  <title>ArcGIS Hub Web Components</title>
   <!-- the css is bundled too. whoa -->
   <script src="/hub-components/build/arcgishub.js"></script>
   <style>
     .parent {
       display: flex;
-      height: 500px;
+      flex-direction: column;
     }
 
     .child {
+      padding: 40px;
       margin: auto;  /* Magic! */
     }
   </style>
 </head>
 <body>
   <div class="parent">
-    <hub-follow-button class="child"
+    <hub-event-details class="child"
       clientid="QVQNb3XfDzoboWS0"
-      initiativeid="dda4e76677604838bf5718eda40b1cc0"
-      orgurl="https://cityx.maps.arcgis.com"
-    >
-    </hub-follow-button>
+      eventtitle="meeting of the badger platoon"
+      orgurl="https://edn.maps.arcgis.com">
+    </hub-event-details>
+
+    <hub-follow-initiative class="child"
+      clientid="QVQNb3XfDzoboWS0"
+      initiativeid="6f28b477336b46a889c16e4ceb61791e"
+      orgurl="https://cityx.maps.arcgis.com">
+    </hub-follow-initiative>
+
+    <hub-button class="child"
+      text="click me!">
+    </hub-button>
   </div>
 </body>
 </html>

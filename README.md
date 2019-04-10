@@ -6,11 +6,19 @@
 <script src='https://unpkg.com/@esri/hub-components@0.0.1/dist/arcgishub.js'></script>
 ```
 ```html
-<hub-follow-button
+<hub-follow-initiative
   clientid="QVQNb3XfDzoboWS0"
   initiativeid="dda4e76677604838bf5718eda40b1cc0"
   orgurl="https://cityx.maps.arcgis.com">
-</hub-follow-button>
+</hub-follow-initiative>
+```
+
+```html
+<hub-event-details
+  clientid="QVQNb3XfDzoboWS0"
+  eventtitle="meeting of the badger platoon"
+  orgurl="https://edn.maps.arcgis.com">
+</hub-event-details>
 ```
 
 ![demo](screenshot.gif)
