@@ -6,14 +6,14 @@
   font-size: 14px;
   width: 380px;
   height: 400px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Arial';
   display: grid;
-  grid-template-columns: 10% auto;
+  grid-template-columns: auto;
   grid-template-rows: 40% 40% 20%;
   grid-template-areas:
-    "header header"
-    ". main"
-    ". footer";
+    "header"
+    "main"
+    "footer";
 }
 
 .hub-event-background-image {
@@ -23,8 +23,11 @@
 
 .hub-event-content {
   grid-area: main;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .hub-event-footer {
   grid-area: footer;
+  padding-left: 40px;
 }

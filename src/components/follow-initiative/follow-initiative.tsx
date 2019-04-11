@@ -4,6 +4,8 @@ import { IUser } from '@esri/arcgis-rest-common-types';
 
 import { followInitiative, unfollowInitiative } from '@esri/hub-initiatives';
 
+import { readSessionFromCookie, writeSessionToCookie } from '../../utils/utils';
+
 @Component({
   tag: 'hub-follow-initiative',
   styleUrl: 'follow-initiative.css',
@@ -59,6 +61,7 @@ export class HubFollowInitiative {
   @State() callToActionText: string = "Follow Our Initiative";
 
   triggerFollow = ():Promise<any> => {
+    this.session = readSessionFromCookie();
     if (!this.session) {
       // register your own app to create a unique clientId
       return UserSession.beginOAuth2({
@@ -67,6 +70,7 @@ export class HubFollowInitiative {
         redirectUri: `${window.location}authenticate.html`
       })
         .then(session => {
+            writeSessionToCookie(session);
             this.session = session.serialize();
             return this.toggleFollow();
         })
