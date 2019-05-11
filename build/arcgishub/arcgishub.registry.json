@@ -2,8 +2,8 @@
   "namespace": "arcgishub",
   "fsNamespace": "arcgishub",
   "loader": "../arcgishub.js",
-  "core": "arcgishub.gj1j2yls.js",
-  "corePolyfilled": "arcgishub.a9wa7b4l.js",
+  "core": "arcgishub.2piqz0n0.js",
+  "corePolyfilled": "arcgishub.s8gybawu.js",
   "components": {
     "hub-button": {
       "bundleIds": {
@@ -12,12 +12,12 @@
     },
     "hub-event-details": {
       "bundleIds": {
-        "$": "qky8xmvw"
+        "$": "8btxnrt5"
       }
     },
     "hub-follow-initiative": {
       "bundleIds": {
-        "$": "r802awiz"
+        "$": "3phm6xd0"
       }
     }
   }
