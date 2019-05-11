@@ -2,12 +2,19 @@
 
 # ArcGIS Hub Web Components
 
+### [Live Demo](https://esridc.github.io/hub-components/)
+
+### Use
+
+1. [Register a new application](https://developers.arcgis.com/documentation/core-concepts/security-and-authentication/signing-in-arcgis-online-users/).
+2. copy the `<script>` tag and `<html>` below into your existing website
+
 ```html
 <script src='https://unpkg.com/@esri/hub-components@0.0.1/dist/arcgishub.js'></script>
 ```
 ```html
 <hub-follow-initiative
-  clientid="QVQNb3XfDzoboWS0"
+  clientid="[insert]"
   initiativeid="dda4e76677604838bf5718eda40b1cc0"
   orgurl="https://cityx.maps.arcgis.com">
 </hub-follow-initiative>
@@ -15,17 +22,24 @@
 
 ```html
 <hub-event-details
-  clientid="QVQNb3XfDzoboWS0"
-  eventtitle="meeting of the badger platoon"
-  orgurl="https://edn.maps.arcgis.com">
+  clientid="[insert your clientid here]"
+  eventtitle="Project Groundbreaking"
+  orgurl="https://cityx.maps.arcgis.com">
 </hub-event-details>
 ```
 
 ![demo](screenshot.gif)
 
-### [Live Demo](https://esridc.github.io/hub-components/)
+### Browser Support
+
+* Chrome
+* Safari
+* Firefox
+* Edge
+* IE11
 
 ### Custom Development
+
 
 Clone this repo to a new directory:
 
@@ -77,7 +91,7 @@ npm test
 
 This is a starter project for building a standalone Web Component using Stencil. Stencil is a compiler for building fast web apps using Web Components.
 
-Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than run-time tool.  Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components that run in Chrome (and all chrome based browsers), Safari, Firefox, Edge, and IE11.
+Stencil combines the best concepts of the most popular frontend frameworks into a compile-time rather than run-time tool.  Stencil takes TypeScript, JSX, a tiny virtual DOM layer, efficient one-way data binding, an asynchronous rendering pipeline (similar to React Fiber), and lazy-loading out of the box, and generates 100% standards-based Web Components.
 
 Stencil components are just Web Components, so they work in any major framework or with no framework at all.
 

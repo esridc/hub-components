@@ -9,6 +9,8 @@ import {
   unregisterForEvent
 } from '@esri/hub-events';
 
+import { readSessionFromCookie, writeSessionToCookie } from '../../utils/utils';
+
 @Component({
   tag: 'hub-event-details',
   styleUrl: 'event-details.css'
@@ -71,14 +73,16 @@ export class HubEventDetails {
   @State() callToActionText: string = "Attend";
 
   triggerRegister = ():Promise<any> => {
+    this.session = readSessionFromCookie();
     if (!this.session) {
       // register your own app to create a unique clientId
-      UserSession.beginOAuth2({
+      return UserSession.beginOAuth2({
         clientId: this.clientid,
         portal: `${this.orgurl}/sharing/rest`,
         redirectUri: `${window.location}authenticate.html`
       })
         .then(session => {
+            writeSessionToCookie(session);
             this.session = session.serialize();
             return this.toggleRegister();
         })
@@ -163,7 +167,7 @@ export class HubEventDetails {
     return <div class="hub-event-details">
       <div class="hub-event-background-image"></div>
       <div class="hub-event-content">
-        <h2>{this.eventtitle}</h2>
+        <h3>{this.eventtitle}</h3>
         <p>{this.eventDate}</p>
         <p>{this.eventOrganizer}</p>
       </div>
